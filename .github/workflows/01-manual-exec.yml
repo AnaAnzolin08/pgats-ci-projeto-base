@@ -1,0 +1,37 @@
+# CI de Nível 01- Disparo manual a partir de 1 clique
+
+name: 'Execução Manual'
+
+# triggers Ou gatilhos de execução
+# gatilho de exec manual = workflows_dispacth
+
+on:
+  workflows_dispacth:
+
+jobs:
+
+  # descrição do job
+  e2e-tests:
+
+    # maquina que job vai executar
+    runs-on: ['ubuntu-latest']
+
+    # passo a passo das acoes do job
+    steps:
+      - uses: actions/checkout@v4
+
+    # - uses: actions/steup-node@v4
+    #   with:
+    #     node-version: lts/*
+    - name: instalando as Yarn  
+      run: npm install -g yarn 
+
+    - name: instalando as dependências 
+      run: yarn
+
+    - name: instalando Playwright
+      run: yarn playeright install
+
+    - name: Teste E2E (end-to-end)
+      run: yarn run e2e
+
